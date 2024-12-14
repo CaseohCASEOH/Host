@@ -3,6 +3,7 @@ from discord.ext import commands
 from discord.ext.commands import Bot
 from discord import app_commands
 import os
+bot.run(os.getenv("BOT_TOKEN"))
 import random
 
 intents = discord.Intents.default()
@@ -120,5 +121,3 @@ async def rizz_checker(interaction: discord.Interaction, user: discord.User):
 async def on_ready():
     print(f'Logged in as {bot.user}')
     await bot.tree.sync()
-
-bot.run("TOKEN")
