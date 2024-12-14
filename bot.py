@@ -121,3 +121,6 @@ async def rizz_checker(interaction: discord.Interaction, user: discord.User):
 async def on_ready():
     print(f'Logged in as {bot.user}')
     await bot.tree.sync()
+
+
+bot.run(DISCORD_TOKEN)
