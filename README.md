@@ -1,1 +1,0 @@
-# no stealing code
