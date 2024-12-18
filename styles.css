@@ -1,116 +1,77 @@
-/* General Styles */
-body {
-  font-family: Arial, sans-serif;
+/* Prevent scrolling */
+html, body {
   margin: 0;
   padding: 0;
-  background-color: #111;
-  color: white;
-  text-align: center;
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
+  overflow: hidden; /* Prevent the page from scrolling */
+  height: 100%; /* Make sure the body takes up the full height */
+  background-color: #000; /* Solid black background */
 }
 
-/* Blurred GIF Background */
-.background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('images%20and%20gifs/background.gif') no-repeat center center fixed;
-  background-size: cover;
-  z-index: -1;
-}
-
-/* Snow Effect */
+/* Snow Effect container */
 #snow-container {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;
-  z-index: -2;
+  pointer-events: none; /* Allow interaction with elements behind snow */
+  z-index: 1000; /* Snow effect above other elements */
 }
 
-@keyframes snowfall {
-  0% { top: -10px; }
-  100% { top: 100%; }
+/* Snowflake styles */
+.snowflake {
+  position: absolute;
+  top: -10px;
+  width: 5px;
+  height: 5px;
+  background-color: #fff;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: snow 10s linear infinite;
 }
 
-/* Music Controls */
-.music-controls {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 999;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.snowflake:nth-child(even) {
+  animation-duration: 8s;
 }
 
-.music-controls button {
-  background-color: #ff6f61;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-size: 14px;
-}
-
-.music-controls button:hover {
-  background-color: #ff4e3a;
-}
-
-/* Volume control styles */
-.music-controls input {
-  width: 200px;
-  margin: 5px 0;
+.snowflake:nth-child(odd) {
+  animation-duration: 12s;
 }
 
 /* Center Block */
 .center-block {
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%); /* Vertically centers the block */
   z-index: 999;
   background: rgba(0, 0, 0, 0.6); /* Slight transparency for the block */
-  border-radius: 15px;
   padding: 20px;
-  max-width: 90%;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
+  text-align: center;
 }
 
+/* Rainbow text animation */
 .rainbow-text {
   font-size: 48px;
   animation: rainbow 5s linear infinite;
   -webkit-background-clip: text;
   color: transparent;
-  text-stroke: 1px black;
+  text-stroke: 1px black; /* Stroke for rainbow text */
 }
 
-@keyframes rainbow {
-  0% { color: red; }
-  14% { color: orange; }
-  28% { color: yellow; }
-  42% { color: green; }
-  57% { color: blue; }
-  71% { color: indigo; }
-  85% { color: violet; }
-  100% { color: red; }
-}
-
+/* Description Text */
 .description {
   font-size: 18px;
   margin: 20px 0;
+  text-align: center;
   text-stroke: 1px black; /* Stroke to description */
 }
 
-/* Icon Styles */
+/* Icons styling */
 .icons {
   display: flex;
   justify-content: center;
@@ -118,20 +79,85 @@ body {
   margin-top: 20px;
 }
 
-.icons a {
-  display: inline-block;
-  padding: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
+/* Styling for each icon */
 .icons img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%; /* Keep icon in a circle shape */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 40px; /* Default size for icons */
+  height: auto;
+  border-radius: 50%;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.icons a:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+/* YouTube and Discord - Remove stroke */
+.icons a img {
+  text-stroke: none; /* Remove stroke from icons */
 }
+
+/* Discord icon wide adjustment */
+.icons a[href="https://discord.gg/hnq9AGVMwq"] img {
+  width: 50px; /* Make Discord icon slightly wider */
+}
+
+/* Icon hover effect */
+.icons img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+/* Music Controls Styling */
+.music-controls {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#play-pause {
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px; /* Adjust size of button */
+}
+
+#volume-control {
+  margin-top: 10px;
+  width: 100px;
+}
+
+/* Snow Effect Animation */
+@keyframes snow {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+/* Rainbow Text Animation */
+@keyframes rainbow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Fix layout and ensure center block touches left and right sides */
+.center-block {
+  width: 90%; /* Ensure it touches both left and right sides */
+  margin: 0 auto;
+}
+
+/* Prevent scrolling and lock content inside the viewport */
+html, body {
+  overflow: hidden;
+  height: 100%;
+}
+
