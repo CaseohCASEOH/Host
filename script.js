@@ -1,34 +1,45 @@
+// Music Controls
 const music = document.getElementById('background-music');
-const playpausebutton = document.getElementById('play-pause');
-const volumecontrol = document.getElementById('volume-control');
+const playPauseBtn = document.getElementById('play-pause');
+const volumeControl = document.getElementById('volume-control');
 
-playpausebutton.addEventListener('click', () => {
+// Toggle Play/Pause
+playPauseBtn.addEventListener('click', () => {
   if (music.paused) {
     music.play();
-    playpausebutton.textContent = 'Pause';
+    playPauseBtn.textContent = 'Pause';
   } else {
     music.pause();
-    playpausebutton.textContent = 'Play';
+    playPauseBtn.textContent = 'Play';
   }
 });
 
-volumecontrol.addEventListener('input', (event) => {
-  music.volume = event.target.value;
+// Adjust Volume
+volumeControl.addEventListener('input', (e) => {
+  music.volume = e.target.value;
 });
 
-const snowcontainer = document.getElementById('snow-container');
+// Start Music on Load (Optional)
+window.addEventListener('DOMContentLoaded', () => {
+  music.volume = 0.5;
+  music.play().catch(() => {
+    playPauseBtn.textContent = 'Play'; // If autoplay is blocked
+  });
+});
 
-function createsnowflake() {
+// Snow Effect
+const snowContainer = document.getElementById('snow-container');
+
+function createSnowflake() {
   const snowflake = document.createElement('div');
   snowflake.classList.add('snowflake');
-  snowflake.style.left = `${Math.random() * 100}vw`;
-  snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
+  snowflake.style.left = Math.random() * 100 + 'vw';
+  snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
   snowflake.style.opacity = Math.random();
-  snowcontainer.appendChild(snowflake);
+  snowContainer.appendChild(snowflake);
 
-  setTimeout(() => {
-    snowflake.remove();
-  }, 5000);
+  // Remove snowflake after animation
+  setTimeout(() => snowflake.remove(), 5000);
 }
 
-setInterval(createsnowflake, 100);
+setInterval(createSnowflake, 100);
