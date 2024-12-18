@@ -21,7 +21,7 @@ volumeControl.addEventListener('input', (e) => {
 
 // Start Music on Load (Optional)
 window.addEventListener('DOMContentLoaded', () => {
-  music.volume = 0.5;
+  music.volume = 100;
   music.play().catch(() => {
     playPauseBtn.textContent = 'Play'; // If autoplay is blocked
   });
