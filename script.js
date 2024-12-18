@@ -5,11 +5,11 @@ const volumeControl = document.getElementById('volume-control');
 
 // Autoplay Music on Page Load
 window.addEventListener('DOMContentLoaded', () => {
-  music.volume = 0.5; // Set initial volume
+  music.volume = 100; // Set initial volume
 
   // Attempt autoplay
   music.play().then(() => {
-    playPauseBtn.textContent = 'Pause'; // Update button if autoplay works
+    playPauseBtn.textContent = 'Pause; // Update button if autoplay works
   }).catch(() => {
     playPauseBtn.textContent = 'Play'; // Fallback if autoplay is blocked
   });
@@ -19,14 +19,14 @@ window.addEventListener('DOMContentLoaded', () => {
 playPauseBtn.addEventListener('click', () => {
   if (music.paused) {
     music.play();
-    playPauseBtn.textContent = 'Pause';
+    playPauseBtn.textContent = 'Play';
   } else {
     music.pause();
-    playPauseBtn.textContent = 'Play';
+    playPauseBtn.textContent = 'Pause';
   }
 });
 
 // Adjust Volume
 volumeControl.addEventListener('input', (e) => {
-  music.volume = e.target.value;
+  music.volume = e.target.value / 100;
 });
