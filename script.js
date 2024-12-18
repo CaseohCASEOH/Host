@@ -3,6 +3,18 @@ const music = document.getElementById('background-music');
 const playPauseBtn = document.getElementById('play-pause');
 const volumeControl = document.getElementById('volume-control');
 
+// Autoplay Music on Page Load
+window.addEventListener('DOMContentLoaded', () => {
+  music.volume = 0.5; // Set initial volume
+
+  // Attempt autoplay
+  music.play().then(() => {
+    playPauseBtn.textContent = 'Pause'; // Update button if autoplay works
+  }).catch(() => {
+    playPauseBtn.textContent = 'Play'; // Fallback if autoplay is blocked
+  });
+});
+
 // Toggle Play/Pause
 playPauseBtn.addEventListener('click', () => {
   if (music.paused) {
@@ -18,28 +30,3 @@ playPauseBtn.addEventListener('click', () => {
 volumeControl.addEventListener('input', (e) => {
   music.volume = e.target.value;
 });
-
-// Start Music on Load (Optional)
-window.addEventListener('DOMContentLoaded', () => {
-  music.volume = 100;
-  music.play().catch(() => {
-    playPauseBtn.textContent = 'Play'; // If autoplay is blocked
-  });
-});
-
-// Snow Effect
-const snowContainer = document.getElementById('snow-container');
-
-function createSnowflake() {
-  const snowflake = document.createElement('div');
-  snowflake.classList.add('snowflake');
-  snowflake.style.left = Math.random() * 100 + 'vw';
-  snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
-  snowflake.style.opacity = Math.random();
-  snowContainer.appendChild(snowflake);
-
-  // Remove snowflake after animation
-  setTimeout(() => snowflake.remove(), 5000);
-}
-
-setInterval(createSnowflake, 100);
