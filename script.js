@@ -19,10 +19,10 @@ window.addEventListener('DOMContentLoaded', () => {
 playPauseBtn.addEventListener('click', () => {
   if (music.paused) {
     music.play();
-    playPauseBtn.textContent = 'Play';
+    playPauseBtn.textContent = 'Pause';
   } else {
     music.pause();
-    playPauseBtn.textContent = 'Pause';
+    playPauseBtn.textContent = 'Play';
   }
 });
 
