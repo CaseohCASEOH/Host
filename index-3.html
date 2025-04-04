@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Calculator By aabbaaii13</title>
+</head>
+<body>
+<style>
+.calculator {
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    background: #f1f3f4;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px #dddddd;
+    transition: transform 1s;
+}
+.calculator:hover {
+    transform: scale(1.05);
+}
+.display {
+    box-shadow: 0 0 5px #cccccc;
+    padding: 20px;
+    background: #dddddd;
+    color: #202124;
+    text-align: right;
+    margin-bottom: 20px;
+    font-family: 'Franklin Gothic Medium';
+    font-size: 25px;
+    min-height: 64px;
+    border-radius: 15px;
+    transition: background-color 0.5s;
+}
+.display:hover {
+    background: #cccccc;
+    box-shadow: 0 0 5px #bbbbbb;
+}
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+button {
+    box-shadow: 0 0 5px #cccccc;
+    padding: 15px;
+    font-size: 25px;
+    border: none;
+    background: #dddddd;
+    color: #202124;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'Franklin Gothic Medium';
+    transition: background-color 0.5s;
+}
+button:hover {
+    box-shadow: 0 0 5px #bbbbbb;
+    background: #cccccc;
+}
+.operator {
+    background: #dddddd;
+    color: #000000;
+    font-family: 'Franklin Gothic Medium';
+}
+.operator:hover {
+    box-shadow: 0 0 5px #bbbbbb;
+    background: #cccccc;
+}
+</style>
+<div class="calculator">
+    <div class="display">Calculator</div>
+    <div class="buttons">
+        <button onclick="clearall()">CA</button>
+        <button onclick="addchars('(')">(</button>
+        <button onclick="addchars(')')">)</button>
+        <button class="operator" onclick="addchars('/')">÷</button>
+        
+        <button onclick="addchars('7')">7</button>
+        <button onclick="addchars('8')">8</button>
+        <button onclick="addchars('9')">9</button>
+        <button class="operator" onclick="addchars('*')">×</button>
+        
+        <button onclick="addchars('4')">4</button>
+        <button onclick="addchars('5')">5</button>
+        <button onclick="addchars('6')">6</button>
+        <button class="operator" onclick="addchars('-')">−</button>
+        
+        <button onclick="addchars('1')">1</button>
+        <button onclick="addchars('2')">2</button>
+        <button onclick="addchars('3')">3</button>
+        <button class="operator" onclick="addchars('+')">+</button>
+        
+        <button onclick="addchars('%')">%</button>
+        <button onclick="addchars('0')">0</button>
+        <button onclick="addchars('.')">.</button>
+        <button class="operator" onclick="calculate()">=</button>
+    </div>
+</div>
+<script>
+let display = document.querySelector('.display');
+let currentexpresion = '0';
+
+function displayupdate() {
+    display.textContent = currentexpresion;
+}
+
+function clearall() {
+    currentexpresion = '0';
+    displayupdate();
+}
+
+function addchars(char) {
+    const operators = ['+', '-', 'x', '÷', '%', '.'];
+    const lastchars = currentexpresion[currentexpresion.length - 1];
+    
+    if (operators.includes(char) && operators.includes(lastchars)) {
+        return;
+    }
+    
+    if (currentexpresion === '0' && char !== '.') {
+        currentexpresion = char;
+    } else {
+        currentexpresion += char;
+    }
+    displayupdate();
+}
+
+function calculate() {
+    try {
+        let expresion = currentexpresion.replace(/%/g, '/100');
+        let result = eval(expresion);
+        currentexpresion = result.toString();
+        displayupdate();
+    } catch (error) {
+        currentexpresion = 'error';
+        displayupdate();
+        setTimeout(clearall, 2000);
+    }
+}
+</script>
+</body>
+</html>
